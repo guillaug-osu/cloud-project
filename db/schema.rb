@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,26 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514223604) do
+ActiveRecord::Schema.define(version: 20170611192621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "boats", force: :cascade do |t|
-    t.string   "name"
-    t.string   "boat_type"
-    t.integer  "length"
-    t.boolean  "at_sea",     default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+  create_table "api_keys", force: :cascade do |t|
+    t.string   "key",        limit: 255, null: false
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "slips", force: :cascade do |t|
-    t.integer  "number"
-    t.integer  "boat_id"
-    t.datetime "arrival_date"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+  create_table "books", force: :cascade do |t|
+    t.string   "name",       limit: 255, null: false
+    t.string   "author",     limit: 255, null: false
+    t.string   "genre",      limit: 255, null: false
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                limit: 255,             null: false
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "authentication_token", limit: 255
+    t.integer  "sign_in_count",                    default: 0
+    t.string   "role",                 limit: 255,             null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
   end
 
 end
